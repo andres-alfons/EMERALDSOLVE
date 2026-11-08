@@ -1,13 +1,13 @@
 export const LAUNCH_OFFER = {
-  text: 'Landing page a $500.000',
+  text: 'Landing page a $400.000',
   detail: 'para los primeros 3 negocios de noviembre.',
-  wa: 'Hola, quiero separar un cupo de la oferta de lanzamiento: landing page a $500.000.',
+  wa: 'Hola, quiero separar un cupo de la oferta de lanzamiento: landing page a $400.000.',
 };
 
 export const PACKAGES = [
   {
     tag: 'Para arrancar', badge: 'Ideal para empezar', wide: true, primary: true,
-    name: 'Esmeralda Inicio', sub: 'Landing page', price: '$700.000',
+    name: 'Esmeralda Inicio', sub: 'Landing page', price: '$500.000',
     features: ['Una página con hasta 5 secciones', 'Botón de WhatsApp y formulario', 'Se ve bien en celular y computador', '2 rondas de cambios'],
     eta: 'Entrega en 5 a 7 días hábiles',
     wa: 'Hola, me interesa el paquete Esmeralda Inicio (landing page).',

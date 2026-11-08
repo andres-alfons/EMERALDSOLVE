@@ -1,7 +1,7 @@
 // Precios del cotizador, en pesos colombianos
 export const PRECIOS = {
   landing: {
-    nombre: 'Landing page', base: 700000, unidad: 'Secciones', uno: 'sección', min: 3, max: 12, step: 1, incl: 5,
+    nombre: 'Landing page', base: 500000, unidad: 'Secciones', uno: 'sección', min: 3, max: 12, step: 1, incl: 5,
     extra: (v) => Math.max(0, v - 5) * 80000,
     eta: (v) => { const a = Math.ceil(Math.max(0, v - 5) / 2); return `${5 + a} a ${7 + a} días hábiles`; },
     hint: 'Incluye 5 secciones. Cada sección adicional suma $80.000.',
@@ -36,7 +36,6 @@ export const QUOTE_TYPES = [
 export const EXTRAS = [
   { id: 'textos', short: 'textos', label: 'Te escribimos los textos', price: 200000 },
   { id: 'logo', short: 'logo', label: 'Logo sencillo', price: 150000 },
-  { id: 'dominio', short: 'dominio', label: 'Dominio .com o .co por un año', price: 80000 },
 ];
 
 export const MANTENIMIENTO = [

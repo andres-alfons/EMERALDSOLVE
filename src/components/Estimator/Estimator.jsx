@@ -13,14 +13,16 @@ function computeQuote({ type, size, extras, maint }) {
   const c = PRECIOS[type];
   const chosen = EXTRAS.filter((e) => extras[e.id]);
   const plan = MANTENIMIENTO.find((m) => m.id === maint);
-  const total = c.base + c.extra(size) + chosen.reduce((s, e) => s + e.price, 0);
-  const adv = Math.round(total / 2);
+  const project = c.base + c.extra(size) + chosen.reduce((s, e) => s + e.price, 0);
+  // El mantenimiento empieza con la entrega: el primer mes se suma al total y al segundo pago
+  const total = project + plan.price;
+  const adv = Math.round(project / 2);
   const eta = c.eta(size);
 
   const lines = ['Hola, hice un estimado en su página:', `- Proyecto: ${c.nombre} (${unitText(c, size)})`];
   if (chosen.length) lines.push(`- Extras: ${chosen.map((e) => e.short).join(', ')}`);
-  if (plan.price) lines.push(`- Mantenimiento: ${plan.label}`);
-  lines.push(`- Estimado: ${cop(total)}, entrega en ${eta}`);
+  if (plan.price) lines.push(`- Mantenimiento: ${plan.label} (${cop(plan.price)} al mes)`);
+  lines.push(`- Estimado: ${cop(total)}${plan.price ? ' con el primer mes de mantenimiento' : ''}, entrega en ${eta}`);
   lines.push('¿Me ayudan con la cotización formal?');
 
   return { c, total, adv, rest: total - adv, eta, plan, message: lines.join('\n') };
@@ -101,15 +103,15 @@ export default function Estimator() {
         <p className="q-total">{cop(shownTotal)}</p>
         <dl className="q-rows">
           <div><dt>Para empezar (50 %)</dt><dd>{cop(q.adv)}</dd></div>
-          <div><dt>Al entregar (50 %)</dt><dd>{cop(q.rest)}</dd></div>
+          <div><dt>{q.plan.price ? 'Al entregar (50 % + primer mes)' : 'Al entregar (50 %)'}</dt><dd>{cop(q.rest)}</dd></div>
           <div><dt>Entrega estimada</dt><dd>{q.eta}</dd></div>
-          {q.plan.price > 0 && <div><dt>Mantenimiento</dt><dd>{cop(q.plan.price)} al mes</dd></div>}
+          {q.plan.price > 0 && <div><dt>Mantenimiento</dt><dd>{cop(q.plan.price)} al mes, desde la entrega</dd></div>}
         </dl>
         {type === 'landing' && (
-          <p className="q-offer">Oferta de lanzamiento: si eres de los primeros 3 negocios de noviembre, la landing base queda en $500.000.</p>
+          <p className="q-offer">Oferta de lanzamiento: si eres de los primeros 3 negocios de noviembre, la landing base queda en $400.000.</p>
         )}
         <a className="btn btn-mint" {...waLinkProps(q.message)}>Enviar esta cotización por WhatsApp</a>
-        <p className="q-note">Es un estimado. El precio final queda por escrito en tu cotización.</p>
+        <p className="q-note">Incluye el dominio .com o .co por un año. Es un estimado: el precio final queda por escrito en tu cotización.</p>
         <p className="sr-only" aria-live="polite">{live}</p>
       </aside>
     </div>

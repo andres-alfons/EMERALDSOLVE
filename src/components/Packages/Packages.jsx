@@ -38,7 +38,7 @@ export default function Packages() {
         <div className="pkgs">
           {PACKAGES.map((p) => <PackageCard key={p.name} pkg={p} />)}
         </div>
-        <p className="pkg-note">Mantenimiento opcional desde $120.000 al mes: hosting, copias de seguridad y cambios pequeños.</p>
+        <p className="pkg-note">Todos los paquetes incluyen el dominio .com o .co por un año. Mantenimiento opcional desde $120.000 al mes: hosting, copias de seguridad y cambios pequeños.</p>
 
         <Estimator />
       </div>
