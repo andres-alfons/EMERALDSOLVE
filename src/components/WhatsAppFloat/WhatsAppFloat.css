@@ -1,0 +1,5 @@
+/* Floating WhatsApp and toast */
+.wa-float{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;border-radius:999px;background:var(--wa);color:var(--wa-ink);font-weight:800;text-decoration:none;box-shadow:0 14px 34px -10px rgba(37,211,102,.55);transition:transform .2s ease}
+.wa-float:hover{transform:translateY(-2px)}
+.wa-float svg{width:26px;height:26px;fill:currentColor}
+@media (max-width:560px){.wa-float span{display:none}.wa-float{width:56px;padding:0;justify-content:center}}

@@ -1,0 +1,15 @@
+/* Footer */
+footer{margin-top:var(--sec);padding-block:56px 40px;border-top:1px solid var(--line)}
+.foot{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:32px}
+.foot-brand{display:flex;flex-direction:column;gap:14px}
+.foot .slogan{font-family:var(--f-display);font-style:italic;font-size:1.1rem;color:var(--text)}
+.social{display:flex;gap:10px}
+.social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--line-2);border-radius:50%;color:var(--text);transition:border-color .2s,color .2s}
+.social a:hover{border-color:var(--emerald);color:var(--mint)}
+.social svg{width:20px;height:20px;fill:currentColor}
+.foot h3{margin-bottom:12px;font-family:var(--f-body);font-size:.95rem;font-weight:800}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;color:var(--muted)}
+.foot ul a{color:var(--muted);text-decoration:none}
+.foot ul a:hover{color:var(--text)}
+.foot-legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-size:.88rem;color:var(--muted)}
+@media (max-width:760px){.foot{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1 / -1}}

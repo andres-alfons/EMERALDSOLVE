@@ -1,0 +1,20 @@
+/* Contact */
+.contact-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);padding:clamp(28px,5vw,64px);border:1px solid var(--line);border-radius:32px;background:var(--surface)}
+.contact-copy{display:flex;flex-direction:column;gap:22px}
+.contact-copy h2{font-size:clamp(2.2rem,3.4vw + 1rem,3.8rem)}
+.contact-copy > p{font-size:1.08rem;color:var(--muted)}
+.contact-list{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.contact-list li{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid var(--line);border-radius:14px;background:var(--ground)}
+.contact-list .c-text{display:flex;flex-direction:column;gap:2px;min-width:0}
+.contact-list span{font-size:.85rem;font-weight:600;color:var(--muted)}
+.contact-list strong,.contact-list a{font-size:1.05rem;font-weight:600;color:var(--text);text-decoration:none}
+.contact-list a:hover{color:var(--mint)}
+.c-icon{width:22px;height:22px;flex:none;fill:var(--mint);color:var(--mint)}
+.idea-form{display:flex;flex-direction:column;gap:16px}
+.form-title{font-family:var(--f-display);font-size:1.5rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-error{font-size:.95rem;font-weight:600;color:var(--danger)}
+.wa-out{display:flex;flex-direction:column;gap:12px;padding:18px;border:1px dashed var(--emerald);border-radius:14px;background:var(--ground)}
+.wa-out p{white-space:pre-line;font-size:.95rem;color:var(--muted)}
+@media (max-width:900px){.contact-card{grid-template-columns:1fr}}
+@media (max-width:520px){.form-row{grid-template-columns:1fr}}

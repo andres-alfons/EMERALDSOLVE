@@ -1,0 +1,23 @@
+/* Hero */
+.hero{position:relative;overflow:hidden;padding-block:clamp(36px,6vw,84px) clamp(64px,8vw,112px)}
+#facets{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-in{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,64px);align-items:center}
+.hero-copy{display:flex;flex-direction:column;gap:26px;min-width:0}
+.hero h1{font-size:var(--fs-hero);font-weight:800;letter-spacing:-.028em;line-height:1}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--mint)}
+.lead{font-size:clamp(1.08rem,.6vw + .95rem,1.28rem);color:var(--muted);max-width:52ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px}
+.trust{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px;font-size:.92rem;color:var(--muted)}
+.hero-gem{position:relative;width:min(100%,520px);aspect-ratio:1/1.08;justify-self:center}
+.gem-glow{position:absolute;inset:24% 22%;border-radius:50%;background:rgba(31,184,132,.24);filter:blur(60px)}
+.gem-svg{position:absolute;left:17.5%;top:13.9%;width:65%;height:auto;transition:opacity .5s ease}
+#gem3d{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .6s ease}
+.hero-gem.is-3d .gem-svg{opacity:0}
+.hero-gem.is-3d #gem3d{opacity:1}
+.spark-svg{position:absolute;left:74%;top:16%;width:9%;height:auto;fill:#E9FFF6}
+@media (prefers-reduced-motion:no-preference){.spark-svg{animation:twinkle 3s ease-in-out 1.7s 2}}
+@keyframes twinkle{0%,100%{opacity:1;transform:scale(1) rotate(0)}50%{opacity:.3;transform:scale(.55) rotate(45deg)}}
+@media (max-width:860px){
+  .hero-in{grid-template-columns:1fr}
+  .hero-gem{order:-1;width:min(64vw,300px)}
+}

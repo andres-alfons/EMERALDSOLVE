@@ -1,0 +1,11 @@
+/* Founder */
+.founder{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:start}
+.founder-head{display:flex;flex-direction:column;gap:14px}
+.founder-head h2{font-size:var(--fs-xl)}
+.founder-sign{margin-top:8px;font-family:var(--f-display);font-style:italic;font-size:1.6rem;color:var(--mint)}
+.founder-role{margin-top:-10px;color:var(--muted)}
+.founder-body{display:flex;flex-direction:column;gap:18px;max-width:60ch;font-size:1.08rem;color:var(--muted)}
+.founder-body strong{font-weight:700;color:var(--text)}
+.stack{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.stack li{padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-family:var(--f-mono);font-size:.85rem;color:var(--text)}
+@media (max-width:860px){.founder{grid-template-columns:1fr}}
