@@ -25,11 +25,11 @@ export default function Footer() {
             </div>
           </div>
           <nav aria-label="Pie de página">
-            <h3>Navegación</h3>
+            <h2>Navegación</h2>
             <ul>{NAV_LINKS.map((l) => <li key={l.href}><a href={l.href}>{l.label}</a></li>)}</ul>
           </nav>
           <div>
-            <h3>Contacto</h3>
+            <h2>Contacto</h2>
             <ul>
               <li><a href="#contacto">Escríbenos</a></li>
               <li><a href={SITE.instagram.url} target="_blank" rel="noopener">Instagram</a></li>

@@ -5,6 +5,8 @@ import { useScrollFrame } from '../../hooks/useScrollFrame';
 import { createFacetField } from './facetField';
 import './Hero.css';
 
+const DESKTOP_3D = '(min-width: 861px) and (pointer: fine)';
+
 function hasWebGL() {
   try {
     const probe = document.createElement('canvas');
@@ -45,15 +47,16 @@ export default function Hero() {
     };
   }, [reduce]);
 
-  // Gema 3D: three.js se carga aparte, solo si hay WebGL y no se pidió reducir el movimiento
+  // Gema 3D: solo en pantallas grandes, con WebGL, sin ahorro de datos y sin pedir menos movimiento.
+  // En celulares se queda la gema plana del logo, que se ve casi igual y no gasta batería ni datos.
   useEffect(() => {
-    if (reduce || !hasWebGL()) return;
+    if (reduce || !matchMedia(DESKTOP_3D).matches || navigator.connection?.saveData || !hasWebGL()) return;
     const hero = heroRef.current;
     let api = null, cancelled = false;
     const onMove = (e) => api?.pointer(e.clientX / innerWidth * 2 - 1, e.clientY / innerHeight * 2 - 1);
     const onLeave = () => api?.pointer(0, 0);
 
-    Promise.all([import('three'), import('./gem3d')])
+    const load = () => Promise.all([import('three'), import('./gem3d')])
       .then(([THREE, { createGem }]) => {
         if (cancelled) return;
         api = createGem(THREE, holderRef.current, gemCanvasRef.current);
@@ -62,10 +65,16 @@ export default function Hero() {
       })
       .catch((err) => console.warn('La gema 3D no se pudo iniciar; se muestra la versión plana.', err));
 
+    // three.js pesa ~600 kB: se descarga con la primera interacción, así no compite con la carga inicial
+    const TRIGGERS = ['pointermove', 'scroll', 'keydown', 'touchstart'];
+    const start = () => { TRIGGERS.forEach((t) => removeEventListener(t, start)); load(); };
+    TRIGGERS.forEach((t) => addEventListener(t, start, { once: true, passive: true }));
+
     hero.addEventListener('pointermove', onMove);
     hero.addEventListener('pointerleave', onLeave);
     return () => {
       cancelled = true;
+      TRIGGERS.forEach((t) => removeEventListener(t, start));
       hero.removeEventListener('pointermove', onMove);
       hero.removeEventListener('pointerleave', onLeave);
       api?.dispose();
@@ -82,9 +91,9 @@ export default function Hero() {
       <canvas id="facets" ref={fieldRef} aria-hidden="true" />
       <div className="wrap hero-in">
         <div className="hero-copy">
-          <p className="code-label">&lt;software a la medida /&gt;</p>
-          <h1>Le damos forma <em>digital</em> a tu idea.</h1>
-          <p className="lead">Páginas web, tiendas virtuales, dashboards y apps hechas a la medida de tu negocio. Precio fijo por escrito, entrega a tiempo y trato directo con quien programa tu proyecto.</p>
+          <p className="code-label">&lt;desarrollo web en Valledupar /&gt;</p>
+          <h1>Páginas web y software <em>a la medida</em> para tu negocio.</h1>
+          <p className="lead">Diseñamos y programamos páginas web, tiendas virtuales, dashboards y apps para negocios de Valledupar y toda Colombia. Precio fijo por escrito, entrega a tiempo y trato directo con quien programa tu proyecto.</p>
           <div className="cta-row">
             <a className="btn btn-mint" href="#contacto">Cuéntame tu idea</a>
             <a className="btn btn-ghost" href="#vista-previa">Mira tu negocio en línea</a>
@@ -92,7 +101,7 @@ export default function Hero() {
           <ul className="trust">
             <li>Entrega desde 7 días</li>
             <li>Garantía de 30 días</li>
-            <li>Desde Valledupar para toda Colombia</li>
+            <li>Cotización en 48 horas</li>
           </ul>
         </div>
         <div className="hero-gem" ref={holderRef}>
